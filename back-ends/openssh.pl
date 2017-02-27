@@ -172,6 +172,23 @@ sub generate_temp_policy() {
 }
 
 sub test_temp_policy() {
+	my $profile = shift(@_);
+	my $dir     = shift(@_);
+	my $gstr = shift(@_);
+
+	if (-e "/usr/bin/ssh") {
+		my ( $fh, $filename ) = tempfile();
+		print $fh $gstr;
+		close $fh;
+		system("/usr/bin/ssh -G -F $filename bogus_server >/dev/null");
+		my $ret = $?;
+		unlink($filename);
+
+		if ( $ret != 0 ) {
+			print STDERR "There is an error in openssh generated policy\n";
+			exit 1;
+		}
+	}
 	return;
 }
 

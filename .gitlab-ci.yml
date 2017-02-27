@@ -1,7 +1,7 @@
 Fedora25:
   image: fedora:25
   before_script:
-  - dnf install -y openssl git which gnutls-utils java-1.8.0-openjdk-devel bind perl asciidoc perl-generators libxslt 'perl(File::pushd)' 'perl(File::Temp)' 'perl(File::Copy)'
+  - dnf install -y openssh-clients openssl git which gnutls-utils java-1.8.0-openjdk-devel bind perl asciidoc perl-generators libxslt 'perl(File::pushd)' 'perl(File::Temp)' 'perl(File::Copy)'
   script:
   - make && make check
   tags:
